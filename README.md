@@ -12,6 +12,12 @@ Pour lancer les migrations de BDD :
 vendor/bin/phinx migrate
 ```
 
+On peut remplir la BDD :
+
+```bash
+vendor/bin/phinx seed:run
+```
+
 Pour les routes, vérifier le chemin dans le fichier `index.php` :
 
 ```php
