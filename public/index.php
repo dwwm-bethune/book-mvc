@@ -1,6 +1,6 @@
 <?php
 
-use M2i\Mvc\App;
+use Book\Mvc\App;
 
 require __DIR__.'/../vendor/autoload.php';
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace M2i\Mvc;
+namespace Book\Mvc;
 
 class View
 {

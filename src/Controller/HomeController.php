@@ -1,8 +1,8 @@
 <?php
 
-namespace M2i\Mvc\Controller;
+namespace Book\Mvc\Controller;
 
-use M2i\Mvc\View;
+use Book\Mvc\View;
 
 class HomeController extends Controller
 {

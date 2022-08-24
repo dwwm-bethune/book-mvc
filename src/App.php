@@ -1,6 +1,6 @@
 <?php
 
-namespace M2i\Mvc;
+namespace Book\Mvc;
 
 class App extends \AltoRouter
 {
@@ -10,7 +10,7 @@ class App extends \AltoRouter
 
         if (is_array($match)) {
             [$controller, $method] = explode('@', $match['target']);
-            $controller = 'M2i\\Mvc\\Controller\\'.$controller;
+            $controller = 'Book\\Mvc\\Controller\\'.$controller;
             $call = new $controller();
             $call->$method(...$match['params']);
         } else {

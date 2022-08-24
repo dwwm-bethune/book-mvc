@@ -1,8 +1,8 @@
 <?php
 
-namespace M2i\Mvc\Model;
+namespace Book\Mvc\Model;
 
-use M2i\Mvc\DB;
+use Book\Mvc\DB;
 
 class Model
 {
