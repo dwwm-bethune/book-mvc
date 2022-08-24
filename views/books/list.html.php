@@ -1,6 +1,12 @@
 <?php self::partial('partials/header'); ?>
 
     <div class="max-w-5xl mx-auto px-3">
+        <div class="text-center mb-8">
+            <a class="bg-gray-900 px-4 py-2 text-white inline-block rounded hover:bg-gray-700 duration-200" href="<?= BASE_URL; ?>/book/new">
+                Créer un livre
+            </a>
+        </div>
+
         <div class="flex flex-wrap -mx-3">
             <?php foreach ($books as $book) { ?>
                 <div class="w-1/2 lg:w-1/4 mb-6">

@@ -20,4 +20,14 @@ abstract class Controller
     {
         header('Location: '.$url);
     }
+
+    public function post($key)
+    {
+        return $_POST[$key] ?? null;
+    }
+
+    public function submit()
+    {
+        return ! empty($_POST);
+    }
 }

@@ -31,4 +31,12 @@ class Book extends Model
     {
         return date('Y', strtotime($this->published_at));
     }
+
+    /**
+     * @todo Bien vérifier le ISBN 10 ou 13.
+     */
+    public function validIsbn()
+    {
+        return strlen($this->isbn) === 10 || strlen($this->isbn) === 13;
+    }
 }

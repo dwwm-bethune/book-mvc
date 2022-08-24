@@ -25,4 +25,50 @@ class BookController extends Controller
             'book' => $book,
         ]);
     }
+
+    public function create()
+    {
+        $book = new Book();
+        $book->title = $this->post('title');
+        $book->price = $this->post('price');
+        $book->isbn = $this->post('isbn');
+        $book->author = $this->post('author');
+        $book->published_at = $this->post('published_at');
+        $book->image = 'uploads/0'.rand(1, 5).'.jpg';
+        $errors = [];
+        $success = false;
+
+        if ($this->submit()) {
+            if (empty($book->title)) {
+                $errors['title'] = 'Le titre est invalide.';
+            }
+
+            if ($book->price < 0 || $book->price > 100) {
+                $errors['price'] = 'Le prix est invalide.';
+            }
+
+            if (! $book->validIsbn()) {
+                $errors['isbn'] = 'L\'ISBN est invalide.';
+            }
+
+            if (empty($book->author)) {
+                $errors['author'] = 'L\'auteur est invalide.';
+            }
+
+            $publishedAt = explode('-', $book->published_at);
+            if (!checkdate((int) ($publishedAt[1] ?? 0), (int) ($publishedAt[2] ?? 0), (int) ($publishedAt[0] ?? 0))) {
+                $errors['published_at'] = 'La date est invalide.';
+            }
+
+            if (empty($errors)) {
+                $success = $book->save();
+            }
+        }
+
+        return $this->render('books/create', [
+            'book' => $book,
+            'errors' => $errors,
+            'success' => $success,
+        ]);
+    }
 }
