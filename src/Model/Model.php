@@ -38,6 +38,21 @@ class Model
         return DB::insert($sql, array_values($this->attributes));
     }
 
+    public function update()
+    {
+        $table = self::getTable();
+
+        $values = implode(', ', array_map(function ($attribute) {
+            return $attribute.' = :'.$attribute;
+        }, array_keys($this->attributes)));
+
+        $sql = "UPDATE $table SET $values WHERE id = :id";
+
+        $this->attributes['id'] = $this->id;
+
+        return DB::update($sql, $this->attributes);
+    }
+
     public static function all()
     {
         $table = self::getTable();
@@ -54,6 +69,15 @@ class Model
         $sql = "SELECT * FROM $table WHERE id = :id";
 
         return DB::selectOne($sql, ['id' => $id], static::class);
+    }
+
+    public static function delete($id)
+    {
+        $table = self::getTable();
+
+        $sql = "DELETE FROM $table WHERE id = :id";
+
+        return DB::delete($sql, ['id' => $id], static::class);
     }
 
     /**

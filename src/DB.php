@@ -42,4 +42,14 @@ class DB
     {
         return self::db()->prepare($sql)->execute($bindings);
     }
+
+    public static function update($sql, $bindings = [])
+    {
+        return self::db()->prepare($sql)->execute($bindings);
+    }
+
+    public static function delete($sql, $bindings = [])
+    {
+        return self::db()->prepare($sql)->execute($bindings);
+    }
 }
