@@ -1,9 +1,9 @@
 <?php self::partial('partials/header'); ?>
 
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-5xl mx-auto px-3">
         <div class="flex flex-wrap -mx-3">
             <?php foreach ($books as $book) { ?>
-                <div class="w-1/4 mb-6">
+                <div class="w-1/2 lg:w-1/4 mb-6">
                     <div class="bg-white shadow-lg rounded-lg h-full mx-3">
                         <a href="<?= BASE_URL; ?>/book/<?= $book->id; ?>">
                             <img class="rounded-t-lg" src="<?= $book->image(); ?>" alt="<?= $book->title; ?>">

@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
 </head>
 <body class="font-[Ubuntu]">
-    <div class="max-w-5xl mx-auto mb-8">
-        <div class="flex justify-between items-center py-4">
+    <div class="max-w-5xl mx-auto px-3 mb-8">
+        <div class="flex justify-between items-center py-6 border-b">
             <h2 class="text-3xl">
                 <a href="<?= BASE_URL; ?>/">Book MVC</a>
             </h2>
