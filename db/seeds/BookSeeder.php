@@ -9,17 +9,19 @@ class BookSeeder extends AbstractSeed
     {
         $faker = Factory::create('fr_FR');
 
-        $data = [
-            [
+        for ($i = 0; $i < 10; $i++) {
+            $data[] = [
                 'title' => $faker->sentence(5),
                 'price' => $faker->randomNumber(2),
                 'isbn' => $faker->ean13(),
                 'author' => $faker->name(),
                 'published_at' => $faker->date(),
-                'image' => null,
-            ],
-        ];
+                'image' => 'uploads/0'.$faker->numberBetween(1, 5).'.jpg',
+            ];
+        }
 
-        $this->table('books')->insert($data)->saveData();
+        $books = $this->table('books');
+        $books->truncate();
+        $books->insert($data)->saveData();
     }
 }
