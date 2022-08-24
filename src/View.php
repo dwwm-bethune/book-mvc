@@ -4,16 +4,16 @@ namespace Book\Mvc;
 
 class View
 {
-    public static function render($template, $data = [])
+    public static function render($view, $data = [])
     {
         foreach ($data as $variable => $value) {
             $$variable = $value;
         }
 
-        $view = __DIR__.'/../views/'.$template.'.html.php';
+        $view = __DIR__.'/../views/'.$view.'.html.php';
 
         if (!file_exists($view)) {
-            throw new \Exception("Le template $template n'existe pas.");
+            throw new \Exception("La vue $view n'existe pas.");
         }
 
         include $view;
