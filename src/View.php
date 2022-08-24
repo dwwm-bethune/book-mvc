@@ -19,6 +19,11 @@ class View
         include $view;
     }
 
+    public static function partial($partial)
+    {
+        require __DIR__.'/../views/'.$partial.'.html.php';
+    }
+
     public static function notFound()
     {
         http_response_code(404);

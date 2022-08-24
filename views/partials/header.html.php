@@ -16,6 +16,7 @@
             <ul>
                 <li>
                     <a class="px-4" href="<?= BASE_URL; ?>/">Accueil</a>
+                    <a class="px-4" href="<?= BASE_URL; ?>/books">Livres</a>
                 </li>
             </ul>
         </div>
