@@ -23,6 +23,12 @@
                 <p class="text-xl text-center text-gray-900">
                     ISBN: <strong><?= $book->isbn; ?></strong>
                 </p>
+
+                <div class="text-center mt-12">
+                    <a class="bg-gray-900 px-4 py-2 text-white inline-block rounded hover:bg-gray-700 duration-200" href="<?= BASE_URL; ?>/cart/<?= $book->id; ?>/add">
+                        Ajouter au panier
+                    </a>
+                </div>
             </div>
         </div>
     </div>

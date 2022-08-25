@@ -6,6 +6,8 @@ class App extends \AltoRouter
 {
     public function run()
     {
+        session_start();
+
         $match = $this->match();
 
         if (is_array($match)) {
