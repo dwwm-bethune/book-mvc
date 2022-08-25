@@ -4,11 +4,11 @@
         <h1 class="text-center text-2xl mb-4">Panier</h1>
 
         <div class="shadow-lg border rounded-lg p-3">
-            <?php if (empty($cart)) { ?>
+            <?php if (empty($cart->items)) { ?>
                 <h2 class="text-center text-2xl mb-4">Votre panier est vide</h2>
             <?php } ?>
 
-            <?php foreach ($cart as $item) { ?>
+            <?php foreach ($cart->items as $item) { ?>
                 <div class="flex items-center border-b mb-3 pb-3">
                     <img class="rounded-lg w-24 mr-4" src="<?= $item['book']->image(); ?>" alt="<?= $item['book']->title; ?>">
 
@@ -19,7 +19,7 @@
 
                     <div class="flex-grow text-right font-bold">
                         <p>x <span class="text-2xl"><?= $item['quantity']; ?></span></p>
-                        <p class="text-3xl"><?= number_format($item['book']->price * $item['quantity'] * 1.2, 2, ',', ''); ?> €</p>
+                        <p class="text-3xl"><?= $cart->price($item); ?> €</p>
                     </div>
 
                     <a class="bg-red-700 px-4 py-2 text-white inline-block rounded hover:bg-red-500 duration-200 ml-8" href="<?= BASE_URL; ?>/cart/<?= $item['book']->id; ?>/delete">
