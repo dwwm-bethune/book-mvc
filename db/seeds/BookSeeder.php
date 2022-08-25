@@ -8,6 +8,7 @@ class BookSeeder extends AbstractSeed
     public function run()
     {
         $faker = Factory::create('fr_FR');
+        $data = [];
 
         for ($i = 0; $i < 10; $i++) {
             $data[] = [
@@ -16,7 +17,7 @@ class BookSeeder extends AbstractSeed
                 'isbn' => $faker->ean13(),
                 'author' => $faker->name(),
                 'published_at' => $faker->date(),
-                'image' => 'uploads/0'.$faker->numberBetween(1, 5).'.jpg',
+                'image' => 'uploads/0'.$faker->numberBetween(1, 6).'.jpg',
             ];
         }
 

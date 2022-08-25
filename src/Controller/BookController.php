@@ -38,7 +38,7 @@ class BookController extends Controller
             $book->isbn = $this->post('isbn');
             $book->author = $this->post('author');
             $book->published_at = $this->post('published_at');
-            $book->image = 'uploads/0'.rand(1, 5).'.jpg';
+            $book->image = 'uploads/0'.rand(1, 6).'.jpg';
 
             if (empty($book->title)) {
                 $errors['title'] = 'Le titre est invalide.';
@@ -90,7 +90,7 @@ class BookController extends Controller
             $book->isbn = $this->post('isbn');
             $book->author = $this->post('author');
             $book->published_at = $this->post('published_at');
-            $book->image = 'uploads/0'.rand(1, 5).'.jpg';
+            $book->image = 'uploads/0'.rand(1, 6).'.jpg';
 
             if (empty($book->title)) {
                 $errors['title'] = 'Le titre est invalide.';

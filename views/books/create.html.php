@@ -2,7 +2,7 @@
 
     <div class="max-w-5xl mx-auto px-3">
         <?php if ($success) { ?>
-            <p class="text-green-500">Le livre a été crée.</p>
+            <p class="text-green-500">Le livre a été créé.</p>
         <?php } ?>
 
         <?php if (!empty($errors)) { ?>
