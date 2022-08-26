@@ -38,7 +38,7 @@
             </div>
         </div>
 
-        <?php if (! empty($cart)) { ?>
+        <?php if (! empty($cart->items)) { ?>
         <div class="text-center mt-12">
             <a class="bg-gray-900 px-4 py-2 text-white inline-block rounded hover:bg-gray-700 duration-200" href="<?= BASE_URL; ?>">
                 Commander

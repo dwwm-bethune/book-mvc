@@ -27,8 +27,7 @@ class CartController extends Controller
 
     public function delete($id)
     {
-        $cart = new Cart();
-        $cart->delete($id);
+        (new Cart())->delete($id);
 
         return $this->redirect(BASE_URL.'/cart');
     }
