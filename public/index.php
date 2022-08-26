@@ -21,6 +21,8 @@ $app->addRoutes([
     ['GET', '/cart', 'CartController@index'],
     ['GET', '/cart/[:id]/add', 'CartController@create'],
     ['GET', '/cart/[:id]/delete', 'CartController@delete'],
+
+    ['GET', '/a-propos', 'AboutController@index'],
 ]);
 
 $app->run();

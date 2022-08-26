@@ -85,6 +85,12 @@ class Model
      */
     private static function getTable()
     {
-        return strtolower(substr(strrchr(get_called_class(), '\\'), 1)).'s';
+        $table = strtolower(substr(strrchr(get_called_class(), '\\'), 1));
+
+        if (substr($table, -1) === 'y') {
+            $table = str_replace('y', 'ie', $table);
+        }
+
+        return $table.'s';
     }
 }
