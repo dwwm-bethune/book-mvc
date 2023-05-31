@@ -7,6 +7,12 @@
             </a>
         </div>
 
+        <?php if ($search = query('search')) { ?>
+            <div class="mb-6 text-center text-2xl">
+                Vous avez cherché "<?= $search; ?>". Nous avons <?= count($books); ?> résultats.
+            </div>
+        <?php } ?>
+
         <div class="flex flex-wrap -mx-3">
             <?php foreach ($books as $book) { ?>
                 <div class="w-1/2 lg:w-1/4 mb-6">

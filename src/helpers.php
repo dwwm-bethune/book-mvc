@@ -9,3 +9,28 @@ function route($path)
 {
     return basePath().'/'.ltrim($path, '/');
 }
+
+function query($parameter, $default = null)
+{
+    return $_GET[$parameter] ?? $default;
+}
+
+function request($parameter, $default = null)
+{
+    return $_POST[$parameter] ?? $default;
+}
+
+function uploaded($parameter)
+{
+    return $_FILES[$parameter] ?? ['error' => 4, 'tmp_name' => null, 'size' => 0, 'name' => null];
+}
+
+function isSubmitted()
+{
+    return ! empty($_POST);
+}
+
+function redirect($url)
+{
+    header('Location: '.$url);
+}

@@ -8,8 +8,16 @@ class BookController extends Controller
 {
     public function index()
     {
+        $books = Book::all();
+
+        if ($search = query('search')) {
+            $books = array_filter($books, function ($book) use ($search) {
+                return str_contains($book->title, $search);
+            });
+        }
+
         return $this->render('books/list', [
-            'books' => Book::all(),
+            'books' => $books,
         ]);
     }
 
@@ -33,13 +41,14 @@ class BookController extends Controller
         $errors = [];
         $success = false;
 
-        if ($this->submit()) {
-            $book->title = $this->post('title');
-            $book->price = $this->post('price');
-            $book->isbn = $this->post('isbn');
-            $book->author = $this->post('author');
-            $book->published_at = $this->post('published_at');
-            $book->image = 'uploads/0'.rand(1, 6).'.jpg';
+        if (isSubmitted()) {
+            $book->title = request('title');
+            $book->price = request('price');
+            $book->discount = request('discount');
+            $book->isbn = request('isbn');
+            $book->author = request('author');
+            $book->published_at = request('published_at');
+            $image = uploaded('image');
 
             if (empty($book->title)) {
                 $errors['title'] = 'Le titre est invalide.';
@@ -47,6 +56,10 @@ class BookController extends Controller
 
             if ($book->price < 0 || $book->price > 100) {
                 $errors['price'] = 'Le prix est invalide.';
+            }
+
+            if (!empty($book->discount) && ($book->discount < 0 || $book->discount > 100)) {
+                $errors['discount'] = 'La promotion est invalide.';
             }
 
             if (! $book->validIsbn()) {
@@ -62,7 +75,39 @@ class BookController extends Controller
                 $errors['published_at'] = 'La date est invalide.';
             }
 
+            $mimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+            if ($image['error'] !== 0) {
+                $errors['image'] = 'L\'image est invalide.';
+            } else {
+                $mime = mime_content_type($image['tmp_name']);
+
+                if (!in_array($mime, $mimeTypes)) {
+                    $errors['image'] = 'L\'image est invalide.';
+                }
+
+                if ($image['size'] > 5 * 1024 * 1024) {
+                    $errors['image'] = 'Le fichier est trop lourd (5 Mo).';
+                }
+            }
+
             if (empty($errors)) {
+                $folder = __DIR__.'/../../public/uploads';
+
+                if (!is_dir($folder)) { // Si le dossier n'existe pas, on le créé
+                    mkdir($folder);
+                }
+
+                // Fiorella-1234 devient 91ca106ff0e1537a4c266ca1626c71ba
+                $name = md5($book->title.'-'.uniqid());
+                $extension = substr(strrchr($image['name'], '.'), 1); // jpg
+                // 91ca106ff0e1537a4c266ca1626c71ba.jpg
+                $filename = $name.'.'.$extension;
+
+                // Upload du fichier
+                move_uploaded_file($image['tmp_name'], $folder.'/'.$filename);
+
+                $book->image = 'uploads/'.$filename;
+
                 $success = $book->save();
             }
         }
@@ -85,13 +130,14 @@ class BookController extends Controller
         $errors = [];
         $success = false;
 
-        if ($this->submit()) {
-            $book->title = $this->post('title');
-            $book->price = $this->post('price');
-            $book->isbn = $this->post('isbn');
-            $book->author = $this->post('author');
-            $book->published_at = $this->post('published_at');
-            $book->image = 'uploads/0'.rand(1, 6).'.jpg';
+        if (isSubmitted()) {
+            $book->title = request('title');
+            $book->price = request('price');
+            $book->discount = request('discount');
+            $book->isbn = request('isbn');
+            $book->author = request('author');
+            $book->published_at = request('published_at');
+            $image = uploaded('image');
 
             if (empty($book->title)) {
                 $errors['title'] = 'Le titre est invalide.';
@@ -99,6 +145,10 @@ class BookController extends Controller
 
             if ($book->price < 0 || $book->price > 100) {
                 $errors['price'] = 'Le prix est invalide.';
+            }
+
+            if ($book->discount > 100) {
+                $errors['discount'] = 'La promotion est invalide.';
             }
 
             if (! $book->validIsbn()) {
@@ -114,7 +164,43 @@ class BookController extends Controller
                 $errors['published_at'] = 'La date est invalide.';
             }
 
+            $mimeTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
+            if (! empty($image['tmp_name'])) {
+                $mime = mime_content_type($image['tmp_name']);
+
+                if (!in_array($mime, $mimeTypes)) {
+                    $errors['image'] = 'L\'image est invalide.';
+                }
+
+                if ($image['size'] > 5 * 1024 * 1024) {
+                    $errors['image'] = 'Le fichier est trop lourd (5 Mo).';
+                }
+            }
+
             if (empty($errors)) {
+                if (! empty($image['tmp_name'])) {
+                    $folder = __DIR__.'/../../public/uploads';
+
+                    if (!is_dir($folder)) { // Si le dossier n'existe pas, on le créé
+                        mkdir($folder);
+                    }
+
+                    if ($book->image) {
+                        @unlink($folder.'/'.str_replace('uploads/', '', $book->image));
+                    }
+
+                    // Fiorella-1234 devient 91ca106ff0e1537a4c266ca1626c71ba
+                    $name = md5($book->title.'-'.uniqid());
+                    $extension = substr(strrchr($image['name'], '.'), 1); // jpg
+                    // 91ca106ff0e1537a4c266ca1626c71ba.jpg
+                    $filename = $name.'.'.$extension;
+
+                    // Upload du fichier
+                    move_uploaded_file($image['tmp_name'], $folder.'/'.$filename);
+
+                    $book->image = 'uploads/'.$filename;
+                }
+
                 $success = $book->update();
             }
         }
@@ -130,6 +216,9 @@ class BookController extends Controller
     {
         Book::delete($id);
 
-        $this->redirect(route('/books'));
+        $folder = __DIR__.'/../../public';
+        @unlink($folder.'/'.Book::find($id)->image);
+
+        redirect(route('/books'));
     }
 }

@@ -15,19 +15,4 @@ abstract class Controller
     {
         return View::notFound();
     }
-
-    public function redirect($url)
-    {
-        header('Location: '.$url);
-    }
-
-    public function post($key)
-    {
-        return $_POST[$key] ?? null;
-    }
-
-    public function submit()
-    {
-        return ! empty($_POST);
-    }
 }
