@@ -15,7 +15,7 @@ class Book extends Model
 
     public function image()
     {
-        return BASE_URL.'/'.$this->image;
+        return route($this->image);
     }
 
     public function price($withDiscount = true)

@@ -1,6 +1,9 @@
 {
     "name": "matthieu/book-mvc",
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
             "Book\\Mvc\\": "src/"
         }

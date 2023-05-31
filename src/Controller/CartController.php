@@ -22,13 +22,13 @@ class CartController extends Controller
         $cart = new Cart();
         $cart->add(Book::find($id), 1);
 
-        return $this->redirect(BASE_URL.'/cart');
+        return $this->redirect(route('/cart'));
     }
 
     public function delete($id)
     {
         (new Cart())->delete($id);
 
-        return $this->redirect(BASE_URL.'/cart');
+        return $this->redirect(route('/cart'));
     }
 }

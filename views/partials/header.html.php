@@ -11,15 +11,21 @@
     <div class="max-w-5xl mx-auto px-3 mb-8">
         <div class="flex justify-between items-center py-6 border-b">
             <h2 class="text-3xl">
-                <a href="<?= BASE_URL; ?>/">Book MVC</a>
+                <a href="<?= route('/'); ?>">Book MVC</a>
             </h2>
+            <form class="relative" action="">
+                <input type="text" name="search" class="px-3 pl-8 rounded-lg border-gray-300">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-2">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </form>
             <ul>
                 <li>
-                    <a class="px-4" href="<?= BASE_URL; ?>/">Accueil</a>
-                    <a class="px-4" href="<?= BASE_URL; ?>/books">Livres</a>
-                    <a class="px-4" href="<?= BASE_URL; ?>/cart">Panier (<?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')); ?>)</a>
-                    <a class="px-4" href="<?= BASE_URL; ?>/login">Connexion</a>
-                    <a class="px-4" href="<?= BASE_URL; ?>/a-propos">A propos</a>
+                    <a class="px-4" href="<?= route('/'); ?>">Accueil</a>
+                    <a class="px-4" href="<?= route('books'); ?>">Livres</a>
+                    <a class="px-4" href="<?= route('/cart'); ?>">Panier (<?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')); ?>)</a>
+                    <a class="px-4" href="<?= route('/login'); ?>">Connexion</a>
+                    <a class="px-4" href="<?= route('/a-propos'); ?>">A propos</a>
                 </li>
             </ul>
         </div>

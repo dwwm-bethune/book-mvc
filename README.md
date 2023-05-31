@@ -17,9 +17,3 @@ On peut remplir la BDD :
 ```bash
 vendor/bin/phinx seed:run
 ```
-
-Pour les routes, vérifier le chemin dans le fichier `index.php` :
-
-```php
-define('BASE_URL', '/book-mvc/public');
-```

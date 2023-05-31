@@ -130,6 +130,6 @@ class BookController extends Controller
     {
         Book::delete($id);
 
-        $this->redirect(BASE_URL.'/books');
+        $this->redirect(route('/books'));
     }
 }
