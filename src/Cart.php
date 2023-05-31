@@ -14,7 +14,7 @@ class Cart
     public function total()
     {
         $total = array_sum(array_map(function ($item) {
-            return $item['book']->price * $item['quantity'] * 1.2;
+            return $item['book']->realPrice() * $item['quantity'] * 1.2;
         }, $this->items));
 
         return number_format($total, 2, ',', '');
@@ -22,7 +22,7 @@ class Cart
 
     public function price($item)
     {
-        return number_format($item['book']->price * $item['quantity'] * 1.2, 2, ',', '');
+        return number_format($item['book']->realPrice() * $item['quantity'] * 1.2, 2, ',', '');
     }
 
     public function add($book, $quantity)

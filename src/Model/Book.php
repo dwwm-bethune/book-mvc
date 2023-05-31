@@ -18,7 +18,7 @@ class Book extends Model
         return route($this->image);
     }
 
-    public function price($withDiscount = true)
+    public function realPrice($withDiscount = true)
     {
         $price = $this->price;
 
@@ -26,7 +26,12 @@ class Book extends Model
             $price -= $this->price * $this->discount / 100;
         }
 
-        return number_format($price * 1.2, 2, ',', '');
+        return $price;
+    }
+
+    public function price($withDiscount = true)
+    {
+        return number_format($this->realPrice($withDiscount) * 1.2, 2, ',', '');
     }
 
     public function publishedAt()

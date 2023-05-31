@@ -14,7 +14,12 @@
 
                     <div>
                         <h2 class="text-lg"><?= $item['book']->title; ?></h2>
-                        <p class="text-2xl font-bold"><?= $item['book']->price(); ?> €</p>
+                        <div class="flex items-center gap-4">
+                            <p class="text-2xl font-bold"><?= $item['book']->price(); ?> €</p>
+                            <?php if ($item['book']->discount) { ?>
+                                <p class="text-xs font-bold">-<?= $item['book']->discount; ?>% <span class="line-through"><?= $item['book']->price(false); ?> €</span></p>
+                            <?php } ?>
+                        </div>
                     </div>
 
                     <div class="flex-grow text-right font-bold">
