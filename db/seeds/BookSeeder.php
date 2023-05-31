@@ -14,6 +14,7 @@ class BookSeeder extends AbstractSeed
             $data[] = [
                 'title' => $faker->sentence(5),
                 'price' => $faker->randomNumber(2),
+                'discount' => $faker->numberBetween(10, 20),
                 'isbn' => $faker->ean13(),
                 'author' => $faker->name(),
                 'published_at' => $faker->date(),

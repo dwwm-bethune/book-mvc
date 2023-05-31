@@ -10,6 +10,7 @@ final class CreateBook extends AbstractMigration
         $this->table('books')
             ->addColumn('title', 'string')
             ->addColumn('price', 'integer')
+            ->addColumn('discount', 'integer')
             ->addColumn('isbn', 'string')
             ->addColumn('author', 'string')
             ->addColumn('published_at', 'date')

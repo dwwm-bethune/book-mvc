@@ -7,6 +7,7 @@ class Book extends Model
     protected $id;
     protected $title;
     protected $price;
+    protected $discount;
     protected $isbn;
     protected $author;
     protected $published_at;
@@ -17,9 +18,15 @@ class Book extends Model
         return BASE_URL.'/'.$this->image;
     }
 
-    public function price()
+    public function price($withDiscount = true)
     {
-        return number_format($this->price * 1.2, 2, ',', '');
+        $price = $this->price;
+
+        if ($withDiscount) {
+            $this->price -= $this->price * $this->discount / 100;
+        }
+
+        return number_format($price * 1.2, 2, ',', '');
     }
 
     public function publishedAt()
@@ -30,6 +37,16 @@ class Book extends Model
     public function year()
     {
         return date('Y', strtotime($this->published_at));
+    }
+
+    public function isbn()
+    {
+        $result = $this->isbn[0].'-';
+
+        $keep = (strlen($this->isbn) === 13) ? 6 : 4;
+        $result .= implode('-', str_split(substr($this->isbn, 1), $keep));
+
+        return $result;
     }
 
     /**

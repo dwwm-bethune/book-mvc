@@ -9,7 +9,10 @@
                 <h1 class="text-center text-2xl font-bold"><?= $book->title; ?></h1>
 
                 <div class="flex items-center justify-between my-10">
-                    <p class="text-4xl font-bold"><?= $book->price(); ?> €</p>
+                    <div>
+                        <p class="text-4xl font-bold"><?= $book->price(); ?> €</p>
+                        <p class="text-lg font-bold">-<?= $book->discount; ?>% <span class="line-through"><?= $book->price(false); ?> €</span></p>
+                    </div>
                     <div class="text-lg text-gray-900">
                         <p>
                             Par <strong><?= $book->author; ?></strong>
@@ -21,7 +24,7 @@
                 </div>
 
                 <p class="text-xl text-center text-gray-900">
-                    ISBN: <strong><?= $book->isbn; ?></strong>
+                    ISBN: <strong><?= $book->isbn(); ?></strong>
                 </p>
 
                 <div class="text-center mt-12">

@@ -23,6 +23,7 @@ class BookController extends Controller
 
         return $this->render('books/show', [
             'book' => $book,
+            'title' => $book->title,
         ]);
     }
 

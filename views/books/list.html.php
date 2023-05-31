@@ -20,7 +20,7 @@
                                     Par <strong><?= $book->author; ?></strong> en <?= $book->year(); ?>
                                 </p>
                                 <p class="text-xs text-center text-gray-400">
-                                    ISBN: <strong><?= $book->isbn; ?></strong>
+                                    ISBN: <strong><?= $book->isbn(); ?></strong>
                                 </p>
                             </div>
                         </a>

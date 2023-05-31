@@ -4,8 +4,12 @@ namespace Book\Mvc;
 
 class View
 {
+    public static $data = [];
+
     public static function render($view, $data = [])
     {
+        self::$data = $data;
+
         foreach ($data as $variable => $value) {
             $$variable = $value;
         }
@@ -21,6 +25,10 @@ class View
 
     public static function partial($partial)
     {
+        foreach (self::$data as $variable => $value) {
+            $$variable = $value;
+        }
+
         require __DIR__.'/../views/'.$partial.'.html.php';
     }
 

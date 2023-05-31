@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book MVC</title>
+    <title><?= isset($title) ? $title.' - Book MVC' : 'Book MVC'; ?></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap">
@@ -18,6 +18,7 @@
                     <a class="px-4" href="<?= BASE_URL; ?>/">Accueil</a>
                     <a class="px-4" href="<?= BASE_URL; ?>/books">Livres</a>
                     <a class="px-4" href="<?= BASE_URL; ?>/cart">Panier (<?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')); ?>)</a>
+                    <a class="px-4" href="<?= BASE_URL; ?>/login">Connexion</a>
                     <a class="px-4" href="<?= BASE_URL; ?>/a-propos">A propos</a>
                 </li>
             </ul>
