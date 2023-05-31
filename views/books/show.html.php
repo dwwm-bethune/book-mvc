@@ -11,7 +11,9 @@
                 <div class="flex items-center justify-between my-10">
                     <div>
                         <p class="text-4xl font-bold"><?= $book->price(); ?> €</p>
-                        <p class="text-lg font-bold">-<?= $book->discount; ?>% <span class="line-through"><?= $book->price(false); ?> €</span></p>
+                        <?php if ($book->discount) { ?>
+                            <p class="text-lg font-bold">-<?= $book->discount; ?>% <span class="line-through"><?= $book->price(false); ?> €</span></p>
+                        <?php } ?>
                     </div>
                     <div class="text-lg text-gray-900">
                         <p>

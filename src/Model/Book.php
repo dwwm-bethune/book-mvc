@@ -23,7 +23,7 @@ class Book extends Model
         $price = $this->price;
 
         if ($withDiscount) {
-            $this->price -= $this->price * $this->discount / 100;
+            $price -= $this->price * $this->discount / 100;
         }
 
         return number_format($price * 1.2, 2, ',', '');
