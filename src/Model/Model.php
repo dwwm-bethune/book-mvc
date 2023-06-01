@@ -6,7 +6,7 @@ use Book\Mvc\DB;
 
 class Model
 {
-    private $attributes = [];
+    protected $attributes = [];
 
     public function __set($attribute, $value)
     {
@@ -83,7 +83,7 @@ class Model
     /**
      * Permet de récupérer le nom de la table.
      */
-    private static function getTable()
+    protected static function getTable()
     {
         $table = strtolower(substr(strrchr(get_called_class(), '\\'), 1));
 

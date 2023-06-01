@@ -34,3 +34,8 @@ function redirect($url)
 {
     header('Location: '.$url);
 }
+
+function value($value, $values = [], $default = null)
+{
+    return in_array($value, $values) ? $value : $default;
+}

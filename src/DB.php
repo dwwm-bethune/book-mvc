@@ -4,13 +4,13 @@ namespace Book\Mvc;
 
 class DB
 {
-    private const HOST = 'localhost';
-    private const NAME = 'book-mvc';
-    private const USER = 'root';
-    private const PASSWORD = '';
-    private static $db;
+    protected const HOST = 'localhost';
+    protected const NAME = 'book-mvc';
+    protected const USER = 'root';
+    protected const PASSWORD = '';
+    protected static $db;
 
-    private static function db()
+    protected static function db()
     {
         if (!self::$db) {
             self::$db = new \PDO('mysql:host='.DB::HOST.';port=3306;dbname='.DB::NAME, DB::USER, DB::PASSWORD, [

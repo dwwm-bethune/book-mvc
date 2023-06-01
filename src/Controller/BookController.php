@@ -8,7 +8,12 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
+        $books = Book::filters([
+            'order_by' => value(query('order_by'), ['id', 'title', 'price'], 'id'),
+            'direction' => value(query('direction'), ['asc', 'desc'], 'asc'),
+            'min_price' => query('min_price'),
+            'max_price' => query('max_price'),
+        ]);
 
         if ($search = query('search')) {
             $books = array_filter($books, function ($book) use ($search) {

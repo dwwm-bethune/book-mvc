@@ -2,6 +2,8 @@
 
 namespace Book\Mvc\Model;
 
+use Book\Mvc\DB;
+
 class Book extends Model
 {
     protected $id;
@@ -60,5 +62,26 @@ class Book extends Model
     public function validIsbn()
     {
         return strlen($this->isbn) === 10 || strlen($this->isbn) === 13;
+    }
+
+    public static function filters($options)
+    {
+        $table = self::getTable();
+
+        $where = [];
+
+        if (! empty($min = $options['min_price'])) {
+            $where[] = 'price >= '.(int) $min;
+        }
+
+        if (! empty($max = $options['max_price'])) {
+            $where[] = 'price <= '.(int) $max;
+        }
+
+        $where = ! empty($where) ? 'WHERE '.implode(' AND ', $where) : '';
+
+        $sql = "SELECT * FROM $table $where ORDER BY {$options['order_by']} {$options['direction']}";
+
+        return DB::select($sql, [], static::class);
     }
 }

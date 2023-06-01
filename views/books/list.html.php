@@ -7,6 +7,39 @@
             </a>
         </div>
 
+        <form action="">
+            <div class="flex justify-between items-center mb-8">
+                <div>
+                    <label for="order_by">Trier par</label>
+                    <select class="rounded-lg border-gray-300" name="order_by" id="order_by">
+                        <option value="id" <?= query('order_by') === 'id' ? 'selected' : ''; ?>>Id</option>
+                        <option value="title" <?= query('order_by') === 'title' ? 'selected' : ''; ?>>Nom</option>
+                        <option value="price" <?= query('order_by') === 'price' ? 'selected' : ''; ?>>Prix</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="direction">Direction</label>
+                    <select class="rounded-lg border-gray-300" name="direction" id="direction">
+                        <option value="asc" <?= query('direction') === 'asc' ? 'selected' : ''; ?>>Asc</option>
+                        <option value="desc" <?= query('direction') === 'desc' ? 'selected' : ''; ?>>Desc</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="min_price">Prix min</label>
+                    <input type="text" class="rounded-lg border-gray-300" name="min_price" id="min_price" value="<?= query('min_price'); ?>">
+                </div>
+
+                <div>
+                    <label for="max_price">Prix max</label>
+                    <input type="text" class="rounded-lg border-gray-300" name="max_price" id="max_price" value="<?= query('max_price'); ?>">
+                </div>
+
+                <button class="bg-gray-900 px-4 py-2 text-white inline-block rounded hover:bg-gray-700 duration-200">Filtrer</button>
+            </div>
+        </form>
+
         <?php if ($search = query('search')) { ?>
             <div class="mb-6 text-center text-2xl">
                 Vous avez cherché "<?= $search; ?>". Nous avons <?= count($books); ?> résultats.
