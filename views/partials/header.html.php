@@ -24,7 +24,11 @@
                     <a class="px-4" href="<?= route('/'); ?>">Accueil</a>
                     <a class="px-4" href="<?= route('books'); ?>">Livres</a>
                     <a class="px-4" href="<?= route('/cart'); ?>">Panier (<?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')); ?>)</a>
-                    <a class="px-4" href="<?= route('/login'); ?>">Connexion</a>
+                    <?php if (user()) { ?>
+                        <a class="px-4" href="<?= route('/logout'); ?>"><?= user()->email; ?></a>
+                    <?php } else { ?>
+                        <a class="px-4" href="<?= route('/login'); ?>">Connexion</a>
+                    <?php } ?>
                     <a class="px-4" href="<?= route('/a-propos'); ?>">A propos</a>
                 </li>
             </ul>
