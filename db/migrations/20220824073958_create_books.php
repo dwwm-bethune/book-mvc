@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateBook extends AbstractMigration
+final class CreateBooks extends AbstractMigration
 {
     public function change(): void
     {

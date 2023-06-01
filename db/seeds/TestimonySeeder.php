@@ -8,10 +8,17 @@ class TestimonySeeder extends AbstractSeed
     public function run()
     {
         $faker = Factory::create('fr_FR');
+        $data = [];
 
-        $this->table('testimonies')->insert([
-            ['content' => 'Super site', 'created_at' => $faker->date()],
-            ['content' => 'Un bon site', 'created_at' => $faker->date()]
-        ])->saveData();
+        for ($i = 0; $i < 10; $i++) {
+            $data[] = [
+                'content' => $faker->sentence(5),
+                'created_at' => $faker->date(),
+            ];
+        }
+
+        $testimonies = $this->table('testimonies');
+        $testimonies->truncate();
+        $testimonies->insert($data)->saveData();
     }
 }
