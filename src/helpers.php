@@ -39,3 +39,8 @@ function value($value, $values = [], $default = null)
 {
     return in_array($value, $values) ? $value : $default;
 }
+
+function user()
+{
+    return $_SESSION['user'] ?? null;
+}

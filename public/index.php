@@ -23,6 +23,7 @@ $app->addRoutes([
     ['GET', '/a-propos', 'AboutController@index'],
 
     ['GET|POST', '/login', 'AuthController@login'],
+    ['GET|POST', '/register', 'AuthController@register'],
     ['GET', '/logout', 'AuthController@logout'],
 ]);
 
