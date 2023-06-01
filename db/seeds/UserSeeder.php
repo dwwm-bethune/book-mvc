@@ -12,6 +12,7 @@ class UserSeeder extends AbstractSeed
             [
                 'email' => 'matthieu@boxydev.com',
                 'password' => password_hash('password', PASSWORD_DEFAULT),
+                'token' => $faker->regexify('[a-z0-9]{64}'),
             ]
         ];
 
@@ -19,6 +20,7 @@ class UserSeeder extends AbstractSeed
             $data[] = [
                 'email' => $faker->safeEmail(),
                 'password' => password_hash('password', PASSWORD_DEFAULT),
+                'token' => $faker->regexify('[a-z0-9]{64}'),
             ];
         }
 

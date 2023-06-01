@@ -18,4 +18,13 @@ class User extends Model
 
         return DB::selectOne($sql, ['email' => $email], static::class);
     }
+
+    public static function findToken($token)
+    {
+        $table = self::getTable();
+
+        $sql = "SELECT * FROM $table WHERE token = :token";
+
+        return DB::selectOne($sql, ['token' => $token], static::class);
+    }
 }

@@ -2,11 +2,19 @@
 
 namespace Book\Mvc;
 
+use Book\Mvc\Model\User;
+
 class App extends \AltoRouter
 {
     public function run()
     {
         session_start();
+
+        if (! isset($_SESSION['user']) && isset($_COOKIE['REMEMBER'])) {
+            if ($user = User::findToken($_COOKIE['REMEMBER'])) {
+                $_SESSION['user'] = $user;
+            }
+        }
 
         $match = $this->match();
 

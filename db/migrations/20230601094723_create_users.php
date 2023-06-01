@@ -10,6 +10,7 @@ final class CreateUsers extends AbstractMigration
         $this->table('users')
             ->addColumn('email', 'string')
             ->addColumn('password', 'string')
+            ->addColumn('token', 'string')
             ->create();
     }
 }

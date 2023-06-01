@@ -20,6 +20,10 @@ class AuthController extends Controller
             if (empty($errors)) {
                 $_SESSION['user'] = $user;
 
+                if ((bool) request('remember')) {
+                    setcookie('REMEMBER', $user->token, time() + 60 * 60 * 24 * 365);
+                }
+
                 redirect(route('/'));
             }
         }
@@ -71,6 +75,7 @@ class AuthController extends Controller
     public function logout()
     {
         unset($_SESSION['user']);
+        setcookie('REMEMBER');
 
         return redirect(route('/'));
     }

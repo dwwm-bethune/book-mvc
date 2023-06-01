@@ -20,6 +20,10 @@
                 <label for="password" class="block">Mot de passe</label>
                 <input type="password" name="password" id="password" class="border-0 border-b focus:ring-0 w-full">
             </div>
+            <div class="mt-10 mb-4 flex items-center gap-3">
+                <input type="checkbox" name="remember" id="remember">
+                <label for="remember">Se rappeller de moi</label>
+            </div>
 
             <div class="text-center">
                 <a class="mr-3" href="<?= route('register'); ?>">Pas de compte ?</a>
